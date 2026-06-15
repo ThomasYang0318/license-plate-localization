@@ -7,19 +7,20 @@ from character_candidates import draw_boxes, find_best_character_boxes, write_re
 
 
 input_folder = Path("Datasets")
-grayscale_folder = Path("GrayscaleDatasets")
-otsu_folder = Path("OtsuDatasets")
-boxed_folder = Path("OtsuBoxedDatasets")
-result_folder = Path("OtsuResults")
+output_folder = Path("outputs")
+grayscale_folder = output_folder / "grayscale"
+otsu_folder = output_folder / "otsu" / "binary"
+boxed_folder = output_folder / "otsu" / "boxed"
+result_folder = output_folder / "otsu" / "results"
 
 image_extensions = {".jpg", ".jpeg", ".png", ".bmp"}
 
 
 def process_images(args: argparse.Namespace) -> None:
-    grayscale_folder.mkdir(exist_ok=True)
-    otsu_folder.mkdir(exist_ok=True)
-    boxed_folder.mkdir(exist_ok=True)
-    result_folder.mkdir(exist_ok=True)
+    grayscale_folder.mkdir(parents=True, exist_ok=True)
+    otsu_folder.mkdir(parents=True, exist_ok=True)
+    boxed_folder.mkdir(parents=True, exist_ok=True)
+    result_folder.mkdir(parents=True, exist_ok=True)
 
     processed_count = 0
 

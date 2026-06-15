@@ -7,10 +7,11 @@ from character_candidates import draw_boxes, find_best_character_boxes, write_re
 
 
 input_folder = Path("Datasets")
-grayscale_folder = Path("GrayscaleDatasets")
-sobel_folder = Path("SobelDatasets")
-boxed_folder = Path("SobelBoxedDatasets")
-result_folder = Path("SobelResults")
+output_folder = Path("outputs")
+grayscale_folder = output_folder / "grayscale"
+sobel_folder = output_folder / "sobel" / "binary"
+boxed_folder = output_folder / "sobel" / "boxed"
+result_folder = output_folder / "sobel" / "results"
 
 image_extensions = {".jpg", ".jpeg", ".png", ".bmp"}
 
@@ -25,10 +26,10 @@ def apply_sobel(gray_image, kernel_size: int):
     return sobel_binary
 
 def process_images(args: argparse.Namespace) -> None:
-    grayscale_folder.mkdir(exist_ok=True)
-    sobel_folder.mkdir(exist_ok=True)
-    boxed_folder.mkdir(exist_ok=True)
-    result_folder.mkdir(exist_ok=True)
+    grayscale_folder.mkdir(parents=True, exist_ok=True)
+    sobel_folder.mkdir(parents=True, exist_ok=True)
+    boxed_folder.mkdir(parents=True, exist_ok=True)
+    result_folder.mkdir(parents=True, exist_ok=True)
 
     processed_count = 0
 

@@ -12,14 +12,14 @@ Both methods generate intermediate image outputs, draw bounding boxes on the ori
 ## Folder Structure
 
 ```text
-Datasets/             Input JPG images
-GrayscaleDatasets/    Grayscale images
-OtsuDatasets/         Binary images from Otsu thresholding
-OtsuBoxedDatasets/    Original images with Otsu candidate boxes
-OtsuResults/          Otsu coordinate output files
-SobelDatasets/        Binary images from Sobel edge detection
-SobelBoxedDatasets/   Original images with Sobel candidate boxes
-SobelResults/         Sobel coordinate output files
+Datasets/                  Input JPG images
+outputs/grayscale/         Grayscale images
+outputs/otsu/binary/       Binary images from Otsu thresholding
+outputs/otsu/boxed/        Original images with Otsu candidate boxes
+outputs/otsu/results/      Otsu coordinate output files
+outputs/sobel/binary/      Binary images from Sobel edge detection
+outputs/sobel/boxed/       Original images with Sobel candidate boxes
+outputs/sobel/results/     Sobel coordinate output files
 ```
 
 ## Programs
