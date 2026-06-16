@@ -1,6 +1,6 @@
 # License Plate Localization
 
-本專案使用傳統影像處理方法進行車牌字元候選框偵測，提供兩種流程：
+本專案使用 YOLO 車牌定位搭配傳統影像處理進行車牌字元候選框偵測，提供兩種流程：
 
 1. 灰階 + 大津演算法 Otsu
 2. 灰階 + Sobel 邊緣偵測
@@ -17,6 +17,7 @@ pip install -r requirements.txt
 
 ```text
 opencv-python
+ultralytics
 ```
 
 ## 輸入資料
@@ -58,6 +59,33 @@ python3 process_sobel_boxes.py
 
 兩支程式可以分開執行，也可以依序執行來比較兩種方法的輸出結果。
 
+若有訓練好的 YOLO 車牌偵測權重，建議先用 YOLO 找車牌位置，再只在車牌 ROI 內做字元候選框偵測：
+
+```bash
+python3 process_otsu_boxes.py --yolo-model models/license_plate.pt
+python3 process_sobel_boxes.py --yolo-model models/license_plate.pt
+```
+
+也可以只測指定影像，避免整包資料重新輸出：
+
+```bash
+python3 process_otsu_boxes.py --only 003 005 020 --yolo-model models/license_plate.pt
+```
+
+目前流程是：YOLO 偵測車牌位置 → 對 YOLO 車牌框外擴少量 padding → 在原圖座標系中遮罩車牌 ROI → 灰階後套用 Otsu 或 Sobel → connected component labeling 找字元候選框 → 依高度、寬度、面積、長寬比、y 位置、x 排列與重疊情況篩選。若沒有提供 `--yolo-model`，程式會退回原本的影像處理 ROI 方法。
+
+將單張影像的結果彙整成作業繳交格式：
+
+```bash
+python3 export_results.py
+```
+
+預設會把 `outputs/otsu/results/*.txt` 合併成：
+
+```text
+outputs/otsu/411285003.txt
+```
+
 ## 輸出資料夾
 
 所有輸出集中在 `outputs/`：
@@ -84,6 +112,7 @@ outputs/grayscale/       灰階影像
 outputs/otsu/binary/     大津二值化影像
 outputs/otsu/boxed/      大津方法框選結果
 outputs/otsu/results/    大津方法座標輸出
+outputs/otsu/411285003.txt 大津方法彙整輸出檔
 outputs/sobel/binary/    Sobel 二值化影像
 outputs/sobel/boxed/     Sobel 方法框選結果
 outputs/sobel/results/   Sobel 方法座標輸出
