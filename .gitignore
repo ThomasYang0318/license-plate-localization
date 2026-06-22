@@ -2,4 +2,11 @@
 __pycache__/
 *.pyc
 .venv/
+.venv-*/
 venv/
+models/*.pt
+outputs/
+outputs_test/
+outputs_verify/
+outputs_yolo_*test/
+tmp_*/
