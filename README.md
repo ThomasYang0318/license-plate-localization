@@ -17,14 +17,10 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-下載模型權重：
+模型權重已透過 Git LFS 放在 `models/`。若 clone 後沒有看到完整檔案，先執行：
 
 ```bash
-mkdir -p models
-curl -L -o models/plate_yolov8.pt \
-  https://huggingface.co/Koushim/yolov8-license-plate-detection/resolve/main/best.pt
-curl -L -o models/char_yolov8.pt \
-  https://huggingface.co/MKgoud/License-Plate-Character-Detector/resolve/main/Charcter-LP.pt
+git lfs pull
 ```
 
 執行目前使用的快速版本：
@@ -76,7 +72,7 @@ submission.txt        作業提交格式，座標已轉為 1-based
 
 `0 字元` 表示 YOLO 第一階段沒有找到車牌。
 
-GitHub 版本只保留 `outputs_yolo/results.csv` 與 `outputs_yolo/submission.txt`，不放輸出圖片、資料集、venv 或模型權重。完整可視化圖片請用上方指令在本機重新產生。
+GitHub 版本只保留 `outputs_yolo/results.csv` 與 `outputs_yolo/submission.txt`，不放輸出圖片、資料集或 venv。模型權重放在 `models/`，並由 Git LFS 管理。完整可視化圖片請用上方指令在本機重新產生。
 
 ## 方法摘要
 

@@ -4,7 +4,6 @@ __pycache__/
 .venv/
 .venv-*/
 venv/
-models/*.pt
 outputs/
 outputs_test/
 outputs_verify/

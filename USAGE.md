@@ -29,14 +29,10 @@ models/plate_yolov8.pt
 models/char_yolov8.pt
 ```
 
-下載指令：
+這兩個 `.pt` 已透過 Git LFS 放在 repo。clone 後若檔案只是 LFS pointer，執行：
 
 ```bash
-mkdir -p models
-curl -L -o models/plate_yolov8.pt \
-  https://huggingface.co/Koushim/yolov8-license-plate-detection/resolve/main/best.pt
-curl -L -o models/char_yolov8.pt \
-  https://huggingface.co/MKgoud/License-Plate-Character-Detector/resolve/main/Charcter-LP.pt
+git lfs pull
 ```
 
 目前實測字元 YOLO 在本機匯入較慢，因此本版預設建議使用 `--skip-char-yolo`，也就是 YOLO 只做車牌定位，字元框由影像處理完成。
